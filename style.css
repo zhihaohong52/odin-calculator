@@ -1,8 +1,62 @@
 :root {
-    --primary-dark: black;
-    --primary-light: white;
-    --secondary-light: #cfcfcf;
-    --secondary-dark: gray;
+    --primary-dark: #333333;
+    --primary-light: #f1f1f1;
+    --secondary-light: #d4d4d2;
+    --secondary-dark: #4e4e4e;
+    --orange: #ff9500;
+    --light-orange: #f8bf63;
+    --light-gray: #d1d1d6;
+    --dark-gray: #505050;
+    --gray: #8e8e93;
+    --white: #ffffff;
+    --black: #000000;
+    --width: calc(40vh);
+    --calculator-height: calc(100vh - 260px);
+    --display-height: calc((100vh - 260px) / 4);
+}
+
+@media screen and (max-width: 768px) {
+    .display {
+        font-size: 2rem;
+        height: calc(var(--display-height) * 0.8);
+    }
+
+    .btn {
+        font-size: 1.2rem;
+        height: 40px;
+        width: 40px;
+    }
+
+    .btn-zero {
+        width: calc(40px * 2 + 8px);
+        padding-left: calc(34px / 2);
+    }
+
+    .footer {
+        height: 80px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .display {
+        font-size: 1.5rem;
+        height: calc(var(--display-height) * 0.6);
+    }
+
+    .btn {
+        font-size: 1rem;
+        height: 30px;
+        width: 30px;
+    }
+
+    .btn-zero {
+        width: calc(30px * 2 + 8px);
+        padding-left: calc(24px / 2);
+    }
+
+    .footer {
+        height: 60px;
+    }
 }
 
 *,
@@ -13,9 +67,10 @@
     box-sizing: border-box;
 }
 
-html {
-    position: relative;
-    min-height: 100%;
+html, body {
+    height: 100%; /* Ensure the body takes full height */
+    margin: 0;
+    padding: 0;
 }
 
 body {
@@ -23,8 +78,134 @@ body {
     font-size: 16px;
     line-height: 1.5;
     color: var(--primary-dark);
-    background-color: var(--primary-light);
-    overflow-x: hidden;
+    background-color: var(--secondary-dark);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distribute space between calculator and footer */
+    align-items: center; /* Center horizontally */
+    padding: 20px 0;
+}
+
+/* MAIN */
+
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.title {
+    font-size: 2rem;
+    color: var(--primary-light);
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.calculator {
+    display: grid;
+    grid-template-rows: 1fr 4fr;
+    background-color: var(--black);
+    border-radius: 24px;
+    overflow: hidden;
+    width: var(--width);
+    height: var(--calculator-height);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+}
+
+.display {
+    grid-row: 1 / 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 15px; /* Reduced padding */
+    background-color: var(--black);
+    color: var(--white);
+    text-align: right;
+    font-size: 2.5rem;
+    line-height: 1.2;
+    height: var(--display-height);
+}
+
+.current-screen {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.previous-screen {
+    font-size: 1.5rem;
+    color: var(--secondary-light);
+}
+
+.buttons-grid {
+    grid-row: 2 / 3;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 8px;
+    padding: 8px;
+    justify-items: center;
+    align-items: center;
+}
+
+.btn {
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--secondary-dark);
+    color: var(--white);
+    border-radius: 100%;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s;
+    height: 60px; /* Reduced button size */
+    width: 60px; /* Reduced button size */
+}
+
+.btn:hover {
+    background-color: var(--gray);
+}
+
+.btn:active {
+    background-color: var(--light-gray);
+}
+
+.btn-lightgray {
+    background-color: var(--gray);
+    color: var(--black);
+}
+
+.btn-lightgray:hover {
+    background-color: var(--light-gray);
+}
+
+.btn-lightgray:active {
+    background-color: var(--light-gray);
+}
+
+.btn-orange {
+    background-color: var(--orange);
+    color: var(--white);
+}
+
+.btn-orange:hover {
+    background-color: var(--light-orange);
+}
+
+.btn-orange:active {
+    background-color: #e08900;
+}
+
+.btn-zero {
+    grid-column: span 2;
+    border-radius: 50px;
+    width: calc(var(--width) / 2 - 16px);
+    justify-content: start;
+    padding-left: calc((60px - 8px) / 2);
 }
 
 /* FOOTER */
